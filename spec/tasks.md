@@ -73,23 +73,23 @@ Fuentes: [`context.md`](../context.md) (`§N`), [`spec.md`](./spec.md) (`RF-xx`,
 
 ## Fase 3 — Home (`/`)
 
-- [ ] **3.1** `CategoryItem`: `<button type="button">` con icono + etiqueta, `aria-pressed` y estilo activo de §7 (D-3).
+- [x] **3.1** `CategoryItem`: `<button type="button">` con icono + etiqueta, `aria-pressed` y estilo activo de §7 (D-3).
   **Archivo**: `components/CategoryItem.tsx` · **RF**: RF-06 (CA-06.2) · **Verifica**: `tsc`; el inspector muestra `aria-pressed` (tras 3.7).
-- [ ] **3.2** `CategoryBar`: fila `flex overflow-x-auto` con el scrollbar oculto (T-6), que mapea `CategoryItem`.
+- [x] **3.2** `CategoryBar`: fila `flex overflow-x-auto` con el scrollbar oculto (T-6), que mapea `CategoryItem`.
   **Archivo**: `components/CategoryBar.tsx` · **RF**: RF-06 (CA-06.4) · **Verifica**: a 375px hay scroll horizontal dentro de la fila y no en la página.
-- [ ] **3.3** `SectionHeader`: título, subtítulo opcional y botón circular `<Link>` con `ArrowRight`.
+- [x] **3.3** `SectionHeader`: título, subtítulo opcional y botón circular `<Link>` con `ArrowRight`.
   **Archivo**: `components/SectionHeader.tsx` · **RF**: RF-09 · **Verifica**: `tsc`; visual (tras 3.8).
-- [ ] **3.4** `ListingGrid`: `grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4` de `ListingCard`, con mensaje de lista vacía.
+- [x] **3.4** `ListingGrid`: `grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4` de `ListingCard`, con mensaje de lista vacía.
   **Archivo**: `components/ListingGrid.tsx` · **RF**: RF-07 · **Verifica**: `tsc`; visual (tras 3.8).
-- [ ] **3.5** Page: eliminar el banco de pruebas y añadir el estado (`isLoading`, `listings`, `query`, `activeCategory = "all"`) y la carga simulada (T-4).
+- [x] **3.5** Page: eliminar el banco de pruebas y añadir el estado (`isLoading`, `listings`, `query`, `activeCategory = "all"`) y la carga simulada (T-4).
   **Archivo**: `app/page.tsx` · **RF**: RF-02 (CA-02.1, CA-02.3) · **Verifica**: al recargar `/` se ve el skeleton ~800 ms; navegar fuera antes de que termine no deja warnings.
-- [ ] **3.6** Page: filtro por `query` derivado en el render (T-3).
+- [x] **3.6** Page: filtro por `query` derivado en el render (T-3).
   **Archivo**: `app/page.tsx` · **RF**: RF-05 · **Verifica**: CA-05.1 a CA-05.3 ("mad", borrar el texto, no hay `useEffect` de filtrado).
-- [ ] **3.7** Page: filtro por `activeCategory` combinado con `query`.
+- [x] **3.7** Page: filtro por `activeCategory` combinado con `query`.
   **Archivo**: `app/page.tsx` · **RF**: RF-06 · **Verifica**: CA-06.1 a CA-06.3.
-- [ ] **3.8** Page: composición `Navbar` → `CategoryBar` → `SectionHeader` (href `/catalog`) → `ListingGrid` / `LoadingIndicator`.
+- [x] **3.8** Page: composición `Navbar` → `CategoryBar` → `SectionHeader` (href `/catalog`) → `ListingGrid` / `LoadingIndicator`.
   **Archivo**: `app/page.tsx` · **RF**: RF-07, RF-09 · **Verifica**: CA-07.1 a 375, 768 y 1280px; CA-07.2 ("zzzz"); CA-09.1.
-- [ ] **3.9** Cierre de la fase 3.
+- [x] **3.9** Cierre de la fase 3.
   **Archivo**: — · **RF**: RF-02, RF-05 – RF-09 · **Verifica**: VB; volver a pasar todos los CA de esos RF; commit "fase 3".
 
 ---
