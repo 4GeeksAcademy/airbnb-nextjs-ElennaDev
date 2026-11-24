@@ -48,25 +48,25 @@ Fuentes: [`context.md`](../context.md) (`§N`), [`spec.md`](./spec.md) (`RF-xx`,
 
 ## Fase 2 — Componentes base
 
-- [ ] **2.1** `PhotoPlaceholder`: bloque `bg-neutral-200 rounded-2xl aspect-square relative` con una `label` opcional.
+- [x] **2.1** `PhotoPlaceholder`: bloque `bg-neutral-200 rounded-2xl aspect-square relative` con una `label` opcional.
   **Archivo**: `components/PhotoPlaceholder.tsx` · **RF**: RF-08, RF-17 · **Verifica**: `tsc`; visual en el banco de pruebas (2.9).
-- [ ] **2.2** `StarRating`: icono `Star` + valor con coma decimal (T-7) y `reviewCount` opcional.
+- [x] **2.2** `StarRating`: icono `Star` + valor con coma decimal (T-7) y `reviewCount` opcional.
   **Archivo**: `components/StarRating.tsx` · **RF**: RF-08, RF-18 · **Verifica**: el banco de pruebas muestra "4,97", no "4.97".
-- [ ] **2.3** `LoadingIndicator`: skeleton de tarjeta con `animate-pulse`, `role="status"` y texto `sr-only`.
+- [x] **2.3** `LoadingIndicator`: skeleton de tarjeta con `animate-pulse`, `role="status"` y texto `sr-only`.
   **Archivo**: `components/LoadingIndicator.tsx` · **RF**: RF-02 (CA-02.2) · **Verifica**: el inspector muestra `role="status"` y el texto oculto.
-- [ ] **2.4** `Logo`: `<Link href="/">` con icono; nombre del proyecto visible solo en `md:`.
+- [x] **2.4** `Logo`: `<Link href="/">` con icono; nombre del proyecto visible solo en `md:`.
   **Archivo**: `components/Logo.tsx` · **RF**: RF-01 (CA-01.2), RF-03 · **Verifica**: a 375px solo el icono; a 768px icono + texto.
-- [ ] **2.5** `SearchBar`: input controlado (`value` / `onChange: (q: string) => void`) en forma de píldora con icono `Search`.
+- [x] **2.5** `SearchBar`: input controlado (`value` / `onChange: (q: string) => void`) en forma de píldora con icono `Search`.
   **Archivo**: `components/SearchBar.tsx` · **RF**: RF-01, RF-05, RF-10 · **Verifica**: en el banco, lo que se escribe se refleja en un texto de eco.
-- [ ] **2.6** `UserMenu`: avatar circular; en `md:`, píldora con icono `Menu` + avatar.
+- [x] **2.6** `UserMenu`: avatar circular; en `md:`, píldora con icono `Menu` + avatar.
   **Archivo**: `components/UserMenu.tsx` · **RF**: RF-01 (CA-01.4) · **Verifica**: visual a 375px y 768px.
-- [ ] **2.7** `Navbar`: `sticky top-0` con `Logo` + `SearchBar` (solo si recibe `onQueryChange`) + `UserMenu`.
+- [x] **2.7** `Navbar`: `sticky top-0` con `Logo` + `SearchBar` (solo si recibe `onQueryChange`) + `UserMenu`.
   **Archivo**: `components/Navbar.tsx` · **RF**: RF-01 (CA-01.1, CA-01.3) · **Verifica**: en el banco, montado con y sin `onQueryChange`: la búsqueda aparece o no.
-- [ ] **2.8** `ListingCard`: `<Link href={/rooms/${id}}>` con `PhotoPlaceholder`, título (`line-clamp-2`), ubicación, "N € / noche", `StarRating` y foco visible.
+- [x] **2.8** `ListingCard`: `<Link href={/rooms/${id}}>` con `PhotoPlaceholder`, título (`line-clamp-2`), ubicación, "N € / noche", `StarRating` y foco visible.
   **Archivo**: `components/ListingCard.tsx` · **RF**: RF-08 · **Verifica**: al pulsar se navega a `/rooms/{id}` (placeholder de la fase 0); con Tab el foco es visible.
-- [ ] **2.9** Banco de pruebas temporal: montar 2.1–2.8 con datos de `data/listings.ts`.
+- [x] **2.9** Banco de pruebas temporal: montar 2.1–2.8 con datos de `data/listings.ts`.
   **Archivo**: `app/page.tsx` · **RF**: RF-04 · **Verifica**: revisión a 375px y 768px frente a §7 (colores, tipografía, radios, espaciados).
-- [ ] **2.10** Cierre de la fase 2.
+- [x] **2.10** Cierre de la fase 2.
   **Archivo**: `components/*` · **RF**: RNF-05 · **Verifica**: VB; cada archivo ≤ ~80 líneas y definido con `const`; commit "fase 2".
 
 ---
