@@ -119,33 +119,33 @@ Fuentes: [`context.md`](../context.md) (`§N`), [`spec.md`](./spec.md) (`RF-xx`,
 
 ## Fase 5 — Detalle (`/rooms/[id]`)
 
-- [ ] **5.1** `BackLink`: `<Link>` con `ArrowLeft` y "Volver al catálogo" (`href` por defecto `/catalog`).
+- [x] **5.1** `BackLink`: `<Link>` con `ArrowLeft` y "Volver al catálogo" (`href` por defecto `/catalog`).
   **Archivo**: `components/BackLink.tsx` · **RF**: RF-16 · **Verifica**: `tsc`; CA-16.1 (tras 5.12).
-- [ ] **5.2** `NotFoundMessage`: mensaje + `<Link>` al Catálogo (D-2).
+- [x] **5.2** `NotFoundMessage`: mensaje + `<Link>` al Catálogo (D-2).
   **Archivo**: `components/NotFoundMessage.tsx` · **RF**: RF-15 · **Verifica**: `tsc`; CA-15.3 (tras 5.11).
-- [ ] **5.3** `GalleryControls`: botones circulares `ChevronLeft` / `ChevronRight` con `aria-label` y `disabled` según `canPrev` / `canNext`.
+- [x] **5.3** `GalleryControls`: botones circulares `ChevronLeft` / `ChevronRight` con `aria-label` y `disabled` según `canPrev` / `canNext`.
   **Archivo**: `components/GalleryControls.tsx` · **RF**: RF-17 (CA-17.3, CA-17.4) · **Verifica**: el inspector muestra `aria-label` y `disabled`.
-- [ ] **5.4** `PhotoGallery`: estado `currentIndex`, `PhotoPlaceholder` con la etiqueta de la foto actual e indicador "i / total".
+- [x] **5.4** `PhotoGallery`: estado `currentIndex`, `PhotoPlaceholder` con la etiqueta de la foto actual e indicador "i / total".
   **Archivo**: `components/PhotoGallery.tsx` · **RF**: RF-17 (CA-17.1, CA-17.2) · **Verifica**: con el alojamiento de 5 fotos, avanzar y retroceder; con el de 1 foto, ambos botones deshabilitados.
-- [ ] **5.5** `ListingHeader`: título, `StarRating`, "N reseñas" y ubicación.
+- [x] **5.5** `ListingHeader`: título, `StarRating`, "N reseñas" y ubicación.
   **Archivo**: `components/ListingHeader.tsx` · **RF**: RF-18 · **Verifica**: CA-18.1.
-- [ ] **5.6** `HostInfo`: avatar placeholder, "Anfitrión: {name}" y años como anfitrión (con singular).
+- [x] **5.6** `HostInfo`: avatar placeholder, "Anfitrión: {name}" y años como anfitrión (con singular).
   **Archivo**: `components/HostInfo.tsx` · **RF**: RF-19 · **Verifica**: CA-19.1 con el anfitrión de 1 año.
-- [ ] **5.7** `AmenityItem`: icono `LucideIcon` + etiqueta.
+- [x] **5.7** `AmenityItem`: icono `LucideIcon` + etiqueta.
   **Archivo**: `components/AmenityItem.tsx` · **RF**: RF-20 · **Verifica**: `tsc`.
-- [ ] **5.8** `AmenitiesGrid`: `grid-cols-2 md:grid-cols-3` de `AmenityItem`.
+- [x] **5.8** `AmenitiesGrid`: `grid-cols-2 md:grid-cols-3` de `AmenityItem`.
   **Archivo**: `components/AmenitiesGrid.tsx` · **RF**: RF-20 · **Verifica**: CA-20.1 a 375px y 768px.
-- [ ] **5.9** `GuestCounter`: controlado, botones `Minus` / `Plus` con `disabled` en los límites y clamp a `[min, max]`.
+- [x] **5.9** `GuestCounter`: controlado, botones `Minus` / `Plus` con `disabled` en los límites y clamp a `[min, max]`.
   **Archivo**: `components/GuestCounter.tsx` · **RF**: RF-21 (CA-21.2) · **Verifica**: pulsar repetidamente: nunca baja de 1 ni pasa de `max`.
-- [ ] **5.10** `BookingCard`: estado `guests = 1`, "N € / noche", `GuestCounter` y CTA "Reservar" `bg-rose-600` sin navegación.
+- [x] **5.10** `BookingCard`: estado `guests = 1`, "N € / noche", `GuestCounter` y CTA "Reservar" `bg-rose-600` sin navegación.
   **Archivo**: `components/BookingCard.tsx` · **RF**: RF-21 (CA-21.1, CA-21.3) · **Verifica**: visual; al pulsar el CTA la ruta no cambia; con `maxGuests: 1` ambos botones deshabilitados.
-- [ ] **5.11** Page: estado (`isLoading`, `listing: Listing | null`), efecto con dependencia `[id]` y tres estados de render (cargando / no encontrado / contenido).
+- [x] **5.11** Page: estado (`isLoading`, `listing: Listing | null`), efecto con dependencia `[id]` y tres estados de render (cargando / no encontrado / contenido).
   **Archivo**: `app/rooms/[id]/page.tsx` · **RF**: RF-02, RF-15 · **Verifica**: CA-02.1, CA-15.2 (`/rooms/1`) y CA-15.3 (`/rooms/no-existe`).
-- [ ] **5.12** Page: composición `Navbar` (sin búsqueda) → `BackLink` → `PhotoGallery` → `ListingHeader` → `HostInfo` → `AmenitiesGrid` → `BookingCard`, con `key={listing.id}` en los componentes con estado.
+- [x] **5.12** Page: composición `Navbar` (sin búsqueda) → `BackLink` → `PhotoGallery` → `ListingHeader` → `HostInfo` → `AmenitiesGrid` → `BookingCard`, con `key={listing.id}` en los componentes con estado.
   **Archivo**: `app/rooms/[id]/page.tsx` · **RF**: RF-01 (CA-01.3), RF-16 – RF-21 · **Verifica**: no aparece la búsqueda; todos los bloques visibles; al pasar de un alojamiento a otro, la galería y el contador vuelven al inicio.
-- [ ] **5.13** Page: layout en una columna en móvil y `md:grid-cols-[2fr_1fr]` con `BookingCard` `sticky top-24` en escritorio.
+- [x] **5.13** Page: layout en una columna en móvil y `md:grid-cols-[2fr_1fr]` con `BookingCard` `sticky top-24` en escritorio.
   **Archivo**: `app/rooms/[id]/page.tsx` · **RF**: RF-22 · **Verifica**: CA-22.1 y CA-22.2 a 375px y 768px, haciendo scroll.
-- [ ] **5.14** Cierre de la fase 5.
+- [x] **5.14** Cierre de la fase 5.
   **Archivo**: — · **RF**: RF-02, RF-15 – RF-22 · **Verifica**: VB; volver a pasar todos los CA de esos RF; commit "fase 5".
 
 ---
