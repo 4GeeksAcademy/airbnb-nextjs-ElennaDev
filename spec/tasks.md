@@ -31,17 +31,17 @@ Fuentes: [`context.md`](../context.md) (`§N`), [`spec.md`](./spec.md) (`RF-xx`,
 
 ## Fase 1 — Tipos y mocks
 
-- [ ] **1.1** Definir `Host`, `Amenity` (`icon: LucideIcon`) y `Listing` según spec §3.
+- [x] **1.1** Definir `Host`, `Amenity` (`icon: LucideIcon`) y `Listing` según spec §3.
   **Archivo**: `types/listing.ts` · **RF**: RF-08, RF-15 – RF-21 · **Verifica**: `tsc`; los campos coinciden uno a uno con spec §3.
-- [ ] **1.2** Definir `Category` (`icon: LucideIcon`).
+- [x] **1.2** Definir `Category` (`icon: LucideIcon`).
   **Archivo**: `types/category.ts` · **RF**: RF-06 · **Verifica**: `tsc`.
-- [ ] **1.3** Definir `SortOrder = 'asc' | 'desc'`.
+- [x] **1.3** Definir `SortOrder = 'asc' | 'desc'`.
   **Archivo**: `types/sort.ts` · **RF**: RF-12 · **Verifica**: `tsc`.
-- [ ] **1.4** Crear el mock de categorías: "Todas" (`id: "all"`) + ≥ 5, con iconos de `lucide-react`.
+- [x] **1.4** Crear el mock de categorías: "Todas" (`id: "all"`) + ≥ 5, con iconos de `lucide-react`.
   **Archivo**: `data/categories.ts` · **RF**: RF-06 · **Verifica**: `tsc`; contar ≥ 6 entradas.
-- [ ] **1.5** Crear el mock de alojamientos: ≥ 12 que cumplan los mínimos de spec §3 (≥ 2 por categoría, precios distintos, uno con 1 foto, uno con 5, uno con `maxGuests: 1`, un anfitrión con 1 año, 2 ubicaciones que compartan texto).
+- [x] **1.5** Crear el mock de alojamientos: ≥ 12 que cumplan los mínimos de spec §3 (≥ 2 por categoría, precios distintos, uno con 1 foto, uno con 5, uno con `maxGuests: 1`, un anfitrión con 1 año, 2 ubicaciones que compartan texto).
   **Archivo**: `data/listings.ts` · **RF**: RF-05 – RF-21 · **Verifica**: `tsc` (cada objeto validado contra `Listing`); repasar a mano la lista de mínimos.
-- [ ] **1.6** Cierre de la fase 1.
+- [x] **1.6** Cierre de la fase 1.
   **Archivo**: — · **RF**: — · **Verifica**: VB; commit "fase 1".
 
 ---
