@@ -152,27 +152,27 @@ Fuentes: [`context.md`](../context.md) (`§N`), [`spec.md`](./spec.md) (`RF-xx`,
 
 ## Fase 6 — Navegación y revisión final
 
-- [ ] **6.1** Recorrido completo: `/` → categoría → búsqueda → tarjeta → Detalle → `BackLink` → `/catalog` → ordenar → tarjeta → Logo → `/`.
+- [x] **6.1** Recorrido completo: `/` → categoría → búsqueda → tarjeta → Detalle → `BackLink` → `/catalog` → ordenar → tarjeta → Logo → `/`.
   **Archivo**: — · **RF**: RF-01, RF-03 · **Verifica**: cada paso llega a la vista esperada; el `Navbar` está presente en las tres (CA-01.1, CA-01.2).
-- [ ] **6.2** Recorrido corto: `/` → "→" del `SectionHeader` → `/catalog`.
+- [x] **6.2** Recorrido corto: `/` → "→" del `SectionHeader` → `/catalog`.
   **Archivo**: — · **RF**: RF-09, RF-03 · **Verifica**: CA-09.1.
-- [ ] **6.3** Repetir 6.1 con DevTools > Network, filtro "Doc".
+- [x] **6.3** Repetir 6.1 con DevTools > Network, filtro "Doc".
   **Archivo**: — · **RF**: RF-03 (CA-03.2) · **Verifica**: no hay peticiones de documento nuevas tras la carga inicial.
-- [ ] **6.4** Auditoría: buscar `any` en `/app`, `/components`, `/types` y `/data`.
+- [x] **6.4** Auditoría: buscar `any` en `/app`, `/components`, `/types` y `/data`.
   **Archivo**: todos · **RF**: RNF-02 · **Verifica**: 0 resultados como tipo.
-- [ ] **6.5** Auditoría: buscar `style=`.
+- [x] **6.5** Auditoría: buscar `style=`.
   **Archivo**: todos · **RF**: RNF-03 · **Verifica**: 0 resultados.
-- [ ] **6.6** Auditoría: buscar `<a `.
+- [x] **6.6** Auditoría: buscar `<a `.
   **Archivo**: todos · **RF**: RF-03 (CA-03.1), RNF-04 · **Verifica**: 0 resultados.
-- [ ] **6.7** Auditoría: `function ` en `/components` y longitud de cada archivo.
+- [x] **6.7** Auditoría: `function ` en `/components` y longitud de cada archivo.
   **Archivo**: `components/*` · **RF**: RNF-05 · **Verifica**: 0 resultados de `function`; todos ≤ ~80 líneas. Dividir el que se pase.
-- [ ] **6.8** Auditoría: configuración y árbol de carpetas.
+- [x] **6.8** Auditoría: configuración y árbol de carpetas.
   **Archivo**: config raíz · **RF**: RNF-06, RNF-07 · **Verifica**: `git diff` sin cambios en la configuración (salvo `lucide-react`); carpetas `/app`, `/components`, `/types` y `/data`.
-- [ ] **6.9** Revisión visual de las tres rutas a 375px y 768px frente a §7.
+- [x] **6.9** Revisión visual de las tres rutas a 375px y 768px frente a §7.
   **Archivo**: — · **RF**: RF-04 · **Verifica**: CA-04.1 (sin scroll horizontal), CA-04.2 y CA-04.3 (sin marca de la referencia).
-- [ ] **6.10** `UserMenu` y `Logo` en las tres vistas y en los dos anchos.
+- [x] **6.10** `UserMenu` y `Logo` en las tres vistas y en los dos anchos.
   **Archivo**: — · **RF**: RF-01 · **Verifica**: CA-01.2 y CA-01.4.
-- [ ] **6.11** Cierre de la fase 6.
+- [x] **6.11** Cierre de la fase 6.
   **Archivo**: — · **RF**: RF-01 – RF-22 · **Verifica**: VB; todos los CA de RF-01 a RF-22 en verde; commit "fase 6".
 
 ---
