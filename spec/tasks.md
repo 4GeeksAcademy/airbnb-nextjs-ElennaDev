@@ -195,3 +195,30 @@ Fuentes: [`context.md`](../context.md) (`§N`), [`spec.md`](./spec.md) (`RF-xx`,
   **Archivo**: `app/layout.tsx` · **RF**: RF-26 · **Verifica**: CA-26.1 en las tres rutas a 375px y 768px.
 - [x] **7.8** Cierre de la fase 7.
   **Archivo**: — · **RF**: RF-23 – RF-26, RNF-05 · **Verifica**: VB; repetir las auditorías 6.4 a 6.7; commit "fase 7".
+
+---
+
+## Fase 8 — Placeholders ilustrados (RF-27)
+
+- [x] **8.1** `GenericIllustration`: casa simple con colinas (SVG en línea, `viewBox="0 0 200 200"`, `preserveAspectRatio="xMidYMax slice"`, `aria-hidden`, colores con `fill-*`).
+  **Archivo**: `components/GenericIllustration.tsx` · **RF**: RF-27 (CA-27.5, CA-27.6) · **Verifica**: `tsc`; sin `fill="#`.
+- [x] **8.2** `BeachIllustration`: mar en franjas, arena y sombrilla.
+  **Archivo**: `components/BeachIllustration.tsx` · **RF**: RF-27 · **Verifica**: `tsc`; visual en 8.10.
+- [x] **8.3** `MansionIllustration`: fachada simétrica con columnas y ciprés.
+  **Archivo**: `components/MansionIllustration.tsx` · **RF**: RF-27 · **Verifica**: `tsc`; visual en 8.10.
+- [x] **8.4** `TrendingIllustration`: bloque urbano con ventanas y planta.
+  **Archivo**: `components/TrendingIllustration.tsx` · **RF**: RF-27 · **Verifica**: `tsc`; visual en 8.10.
+- [x] **8.5** `CabinIllustration`: cabaña entre pinos y montañas.
+  **Archivo**: `components/CabinIllustration.tsx` · **RF**: RF-27 · **Verifica**: `tsc`; visual en 8.10.
+- [x] **8.6** `PoolIllustration`: piscina con escalera y palmera.
+  **Archivo**: `components/PoolIllustration.tsx` · **RF**: RF-27 · **Verifica**: `tsc`; visual en 8.10.
+- [x] **8.7** `IllustrationSun`: sol cuya posición y color dependen de `variant % 3`.
+  **Archivo**: `components/IllustrationSun.tsx` · **RF**: RF-27 (CA-27.3) · **Verifica**: `tsc`.
+- [x] **8.8** `CategoryIllustration`: mapa literal de degradados (categoría × 3 variantes), mapa de escenas y fallback a `GenericIllustration`.
+  **Archivo**: `components/CategoryIllustration.tsx` · **RF**: RF-27 (CA-27.1, CA-27.2) · **Verifica**: `tsc`; revisión del fallback.
+- [x] **8.9** Rehacer `PhotoPlaceholder`: props `category`, `variant`, `label` (accesible y no visible, D-8). Capa ilustrada con `role="img"` separada de los overlays (`children`). Se mantienen `className` y el `rounded-2xl` por defecto.
+  **Archivo**: `components/PhotoPlaceholder.tsx` · **RF**: RF-27 (CA-27.4, CA-27.5) · **Verifica**: `tsc`; inspector (los overlays quedan fuera de `role="img"`).
+- [x] **8.10** Pasar `category` desde `ListingCard`; añadir `category` a `PhotoGallery` (índice → `variant`) y pasarla desde `RoomContent`.
+  **Archivo**: `components/ListingCard.tsx`, `components/PhotoGallery.tsx`, `components/RoomContent.tsx` · **RF**: RF-27 (CA-27.1, CA-27.3) · **Verifica**: Home filtrada por cada categoría y galería de `/rooms/1` (fotos 1–5: cada par consecutivo distinto, CA-27.3) a 375px y 768px.
+- [x] **8.11** Cierre de la fase 8.
+  **Archivo**: — · **RF**: RF-27, RNF-03, RNF-05 · **Verifica**: VB; CA-27.2 (render temporal con categoría desconocida y sin categoría); CA-27.4 (repetir CA-17.2/17.3, CA-23.1, CA-24.1/24.2); CA-27.6 (búsquedas); CA-27.7 (`wc -l`); auditorías 6.4 a 6.7; commit "fase 8".

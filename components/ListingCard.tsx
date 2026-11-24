@@ -13,7 +13,7 @@ interface ListingCardProps {
 }
 
 const ListingCard = ({ listing }: ListingCardProps) => {
-  const { id, title, location, pricePerNight, rating, photos, badge } = listing;
+  const { id, title, location, pricePerNight, rating, category, badge } = listing;
   // Estado local no compartido (excepción a T-2 aceptada en plan.md, fase 7).
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -24,8 +24,9 @@ const ListingCard = ({ listing }: ListingCardProps) => {
         href={`/rooms/${id}`}
         className="group block rounded-2xl focus-visible:ring-2 focus-visible:ring-neutral-800 focus-visible:ring-offset-4 focus-visible:outline-none"
       >
+        {/* Sin label: dentro del <Link> sería ruido en su nombre accesible; el título ya lo describe. */}
         <PhotoPlaceholder
-          label={photos[0]}
+          category={category}
           className="aspect-square rounded-2xl shadow-sm transition-opacity group-hover:opacity-90"
         >
           {badge && <ListingBadge label={badge} />}

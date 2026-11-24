@@ -60,7 +60,10 @@ Ubicación: cada componente en `/components/<Nombre>.tsx`; interfaces en `/types
 | ↳ `CategoryItem` | Home | Botón icono + etiqueta; estilo resaltado (subrayado / opacidad completa) si está activo. |
 | `ListingGrid` | Home | Cuadrícula responsive de `ListingCard` (1 col móvil, varias en escritorio). Muestra mensaje si la lista está vacía. |
 | `ListingCard` ♻️ | Home, Catálogo | Tarjeta: `PhotoPlaceholder`, título, precio por noche y `StarRating`. Toda la tarjeta es un `<Link>` a `/rooms/[id]`. |
-| ↳ `PhotoPlaceholder` ♻️ | Home, Catálogo, Detalle | Bloque gris con proporción fija que sustituye a la foto. |
+| ↳ `PhotoPlaceholder` ♻️ | Home, Catálogo, Detalle | Placeholder **ilustrado** con proporción fija que sustituye a la foto (no son fotos reales): compone `CategoryIllustration` según la categoría del alojamiento y aloja los overlays. |
+| ↳ `CategoryIllustration` ♻️ | Home, Catálogo, Detalle | Elige el degradado de fondo, el sol y la escena a partir de `category` y `variant`. Si la categoría no tiene ilustración, usa `GenericIllustration`. |
+| ↳ `BeachIllustration`, `MansionIllustration`, `TrendingIllustration`, `CabinIllustration`, `PoolIllustration`, `GenericIllustration` ♻️ | Home, Catálogo, Detalle | Una escena SVG en línea por categoría (`beach`, `mansions`, `trending`, `cabins`, `pools`) más una genérica. Estilo plano, decorativa (`aria-hidden`). |
+| ↳ `IllustrationSun` ♻️ | Home, Catálogo, Detalle | Sol de la escena; su posición y su color cambian con `variant` para que cada foto de la galería se vea distinta. |
 | ↳ `StarRating` ♻️ | Home, Catálogo, Detalle | Icono de estrella + valoración numérica (y nº de reseñas opcional). |
 | `LoadingIndicator` ♻️ | Home, Catálogo, Detalle | Spinner / skeleton accesible (`role="status"`) mientras `isLoading` es `true`. |
 | `SectionHeader` | Home | Título de sección + `<Link>` "Ver todo →" a `/catalog` (como "Alojamientos populares en…" de Airbnb). Da el acceso Home → Catálogo. |
@@ -81,7 +84,7 @@ Ubicación: cada componente en `/components/<Nombre>.tsx`; interfaces en `/types
 | Componente | Vista(s) | Responsabilidad |
 |---|---|---|
 | `BackLink` | Detalle | `<Link>` "← Volver al catálogo" a `/catalog` (o breadcrumb `Catálogo / Título`). |
-| `PhotoGallery` | Detalle | Muestra la foto actual (`PhotoPlaceholder` ♻️) y el indicador "2 / 5"; gestiona el índice. |
+| `PhotoGallery` | Detalle | Muestra la foto actual (`PhotoPlaceholder` ♻️, con la `category` del alojamiento y el índice como `variant`) y el indicador "2 / 5"; gestiona el índice. |
 | ↳ `GalleryControls` | Detalle | Botones Anterior / Siguiente con `aria-label`; deshabilitados en los extremos. |
 | `ListingHeader` | Detalle | Título, `StarRating` ♻️, nº de reseñas y ubicación. |
 | `HostInfo` | Detalle | Placeholder de avatar, "Anfitrión: Nombre" y años como anfitrión. |
@@ -135,6 +138,7 @@ Por eso `Navbar` se renderiza **en cada page**, no en `app/layout.tsx`: así la 
 7. **Rutas**: `/`, `/catalog`, `/rooms/[id]`.
 8. **Proyecto intacto**: no reinstalar ni modificar la configuración existente (Next.js 16, Tailwind v4, `tsconfig.json`).
 9. **Next.js 16**: consultar `node_modules/next/dist/docs/` ante cualquier duda de API (p. ej. `params` como Promise), según indica `AGENTS.md`.
+10. **Dependencia aceptada**: `lucide-react`, solo para iconos (categorías, amenities, UI). No sustituye a Tailwind ni se usa como librería de componentes. No se añaden más dependencias.
 
 ---
 
@@ -218,7 +222,7 @@ Se usan los nombres de la tabla de §4. Los marcados **(nuevo)** no estaban en l
 | `SectionHeader` | `title: string`, `subtitle?: string`, `href?: string` | Encabeza cada bloque: título a la izquierda y botón circular "→" (`bg-neutral-100`, `<Link>`) a la derecha. Subtítulo gris opcional debajo. | Título `md:text-2xl`. |
 | `ListingGrid` | `listings: Listing[]` | Debajo de `CategoryBar` / `SectionHeader`. `grid grid-cols-1 gap-6`. Contiene `ListingCard`. | `md:grid-cols-2`, `lg:grid-cols-3`, `xl:grid-cols-4`. |
 | `ListingCard` | `listing: Listing` | `<Link>` vertical: foto (`PhotoPlaceholder`, con `ListingBadge` y `FavoriteButton` encima) y, debajo, título, meta y la línea "precio / noche · `StarRating`". Sin borde ni fondo: la "tarjeta" es la foto redondeada. | Igual; cambia el número de columnas del contenedor. |
-| `PhotoPlaceholder` | `label?: string`, `className?: string` | Bloque `bg-neutral-200 rounded-2xl aspect-square` (casi 1:1 en la captura), `relative` para alojar overlays. | Sin cambios. En Detalle pasa a `md:aspect-video`. |
+| `PhotoPlaceholder` | `category?: string`, `variant?: number`, `label?: string`, `className?: string`, `children?: ReactNode` | Contenedor `relative overflow-hidden rounded-2xl aspect-square` (casi 1:1 en la captura). Dentro, una capa ilustrada (`CategoryIllustration`, ver "Placeholders ilustrados") y encima los overlays (`children`). | Sin cambios. En Detalle pasa a `md:aspect-video`; la escena se recorta centrada abajo para llenar cualquier proporción. |
 | `StarRating` | `rating: number`, `reviewCount?: number` | Inline: ★ + valor con coma decimal ("4,97"), en `text-sm`. Se coloca a la derecha del precio, separado por " · ". | Sin cambios. |
 | `LoadingIndicator` | `label?: string` | Ocupa el lugar del contenido. Recomendado: **skeleton** con la forma de `ListingCard` (`bg-neutral-200 animate-pulse rounded-2xl`), con `role="status"`. | Repite el skeleton según el número de columnas. |
 | `ListingBadge` **(nuevo)** | `label: string` | Píldora `bg-white/90 rounded-full text-xs font-semibold shadow-sm`, `absolute top-3 left-3` sobre la foto (p. ej. "Favorito de los viajeros"). | Sin cambios. |
@@ -235,6 +239,29 @@ Se usan los nombres de la tabla de §4. Los marcados **(nuevo)** no estaban en l
 - Precio: **"95 € / noche"**, con el importe en `font-semibold neutral-800` y "/ noche" en gris. Por noche y no "en total", como exige §4.
 - Hover (escritorio): `hover:opacity-90` o una ligera escala de la foto. Foco visible con `focus-visible:ring-2 ring-neutral-800`.
 
+### Placeholders ilustrados
+
+No hay fotos reales: cada placeholder es una **escena plana en SVG** sobre un **degradado suave**. Mantiene la proporción, el `rounded-2xl` y los overlays (`ListingBadge`, `FavoriteButton`, controles de la galería).
+
+- **Estilo**: formas geométricas simples, sin contornos o con `stroke` fino, de 3 a 5 colores por escena, en tonos `-100` a `-300` de Tailwind más algún acento `-400`/`-500`. Coherente con la paleta neutra de "Colores": el placeholder pone el color, como lo hacían las fotos en la referencia.
+- **Colores** solo con clases (`fill-*`, `stroke-*`, `bg-linear-*`, `from-*`, `to-*`), sin `style` ni `fill="#…"`.
+- **Composición** (de atrás adelante):
+  1. Degradado de fondo.
+  2. `IllustrationSun`.
+  3. Escena de la categoría, anclada abajo (`preserveAspectRatio="xMidYMax slice"`) para llenar tanto 1:1 como 4:3 o 16:9.
+
+| Categoría | Escena | Degradado (variante 0) |
+|---|---|---|
+| `beach` (Playa) | Mar en franjas, arena y sombrilla | `from-sky-100 to-amber-50` |
+| `mansions` (Mansiones) | Fachada simétrica con columnas y ciprés | `from-violet-100 to-stone-50` |
+| `trending` (Tendencias) | Bloque urbano con ventanas y planta | `from-rose-100 to-orange-50` |
+| `cabins` (Cabañas) | Cabaña de madera entre pinos y montañas | `from-emerald-100 to-lime-50` |
+| `pools` (Piscinas) | Piscina con escalera y palmera | `from-cyan-100 to-teal-50` |
+| Genérica (sin ilustración) | Casa simple con colinas | `from-neutral-100 to-stone-50` |
+
+- **Variantes** (`variant` = índice de la foto en la galería, en ciclos de 3): mañana, mediodía y atardecer. Cada variante cambia el **degradado** (dentro de la familia de color de la categoría) y la **posición y el color del sol** (izquierda y ámbar claro, centro y amarillo, derecha y naranja suave). En las tarjetas siempre se usa la variante 0.
+- **Accesibilidad**: los SVG llevan `aria-hidden="true"`. Si hay `label`, la capa ilustrada (no el contenedor) lleva `role="img"` y `aria-label` (p. ej. "Foto: Salón"), y los overlays quedan fuera de esa capa para seguir siendo accesibles. El texto de la etiqueta ya no se muestra visible.
+
 ### Aplicar el sistema al Catálogo (`/catalog`)
 
 No hay captura; se aplican los mismos tokens:
@@ -249,7 +276,7 @@ No hay captura; se aplican los mismos tokens:
 ### Aplicar el sistema al Detalle (`/rooms/[id]`)
 
 - **`BackLink`**: arriba, `text-sm font-medium neutral-800` con "←". También puede ser un botón circular `size-8 bg-neutral-100 rounded-full`, igual que el "→" de las secciones (misma forma, distinta dirección).
-- **`PhotoGallery`**: `PhotoPlaceholder` a sangre en móvil (sin gutter, `aspect-square` o `aspect-[4/3]`); en `md:`, `rounded-2xl aspect-video`. **`GalleryControls`**: botones circulares blancos `size-8 shadow-md`, centrados verticalmente a izquierda y derecha. Contador "2 / 5" en píldora `bg-black/60 text-white text-xs`, abajo a la derecha.
+- **`PhotoGallery`**: `PhotoPlaceholder` a sangre en móvil (sin gutter, `aspect-square` o `aspect-[4/3]`); en `md:`, `rounded-2xl aspect-video`. Recibe la categoría del alojamiento y pasa el índice actual como `variant`, así que cada foto se ve distinta (ver "Placeholders ilustrados"). **`GalleryControls`**: botones circulares blancos `size-8 shadow-md`, centrados verticalmente a izquierda y derecha. Contador "2 / 5" en píldora `bg-black/60 text-white text-xs`, abajo a la derecha.
 - **`ListingHeader`**: título `text-2xl font-semibold` y, debajo, una línea `text-sm` con `StarRating` · "N reseñas" (subrayado) · ubicación.
 - **Bloques de contenido** (`HostInfo`, `AmenitiesGrid`): separados con `py-6 border-t border-neutral-200`, como los grupos del footer.
 - **`HostInfo`**: avatar `size-12 rounded-full bg-neutral-200` + "Anfitrión: Nombre" (semibold) + "N años como anfitrión" (`text-sm neutral-500`).

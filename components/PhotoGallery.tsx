@@ -6,9 +6,10 @@ import PhotoPlaceholder from "@/components/PhotoPlaceholder";
 
 interface PhotoGalleryProps {
   photos: string[];
+  category?: string;
 }
 
-const PhotoGallery = ({ photos }: PhotoGalleryProps) => {
+const PhotoGallery = ({ photos, category }: PhotoGalleryProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const lastIndex = photos.length - 1;
 
@@ -18,6 +19,8 @@ const PhotoGallery = ({ photos }: PhotoGalleryProps) => {
   return (
     <section aria-label="Galería de fotos" aria-roledescription="carrusel" className="-mx-6 md:mx-0">
       <PhotoPlaceholder
+        category={category}
+        variant={currentIndex}
         label={photos[currentIndex]}
         className="aspect-[4/3] md:aspect-video md:rounded-2xl"
       >

@@ -19,7 +19,9 @@ Fuente de verdad: [`context.md`](../context.md). Este documento no repite sus ta
 | D-3 ✅ | El estilo de `CategoryItem` sigue **§7** (chip con fondo `neutral-100` cuando está activo) y no el "subrayado" de §4. | §7 es más específica y posterior. |
 | D-4 ✅ | **Iconos con `lucide-react`**: es la única dependencia nueva autorizada. Se usa para todos los iconos (categorías, amenities, lupa, menú, avatar, flechas, estrella, corazón, − / +). En los tipos, el campo `icon` es de tipo `LucideIcon`. | Autorizado expresamente por el usuario. No contradice §6.3, que prohíbe librerías de **componentes**, no de iconos. Es una excepción a la regla de "no añadir dependencias" y a §6.8: solo cambian `package.json` y `package-lock.json`; el resto de la configuración queda intacta. Los iconos SVG heredan el color con `currentColor`, así que se colorean con `text-*` de Tailwind. |
 | D-5 ✅ | `Listing.photos` = `string[]` (etiquetas de los placeholders, p. ej. "Salón"). | §4 deja abierto "nº o lista". Una lista permite mostrar un texto distinto por foto en la galería. |
-| D-6 ✅ | La categoría inicial es **`"all"` ("Todas")**, que no filtra. | §5 permite "la primera o Todas". Con "Todas", la Home muestra todo al cargar. |
+| D-6 ✅ | La categoría inicial es **`"all"` ("Todas")**, que no filtra. |
+| D-8 ✅ | **Placeholders ilustrados** (RF-27): la etiqueta de la foto (`label`) deja de ser visible y pasa a ser el nombre accesible (`role="img"` + `aria-label`) de una capa **interior**, nunca del contenedor. | Si el contenedor tuviera `role="img"`, sus hijos (botones de la galería y del favorito) se tratarían como decorativos y dejarían de ser accesibles. |
+| D-9 ✅ | **Variantes de la galería**: `variant = índice % 3` (mañana / mediodía / atardecer). Cambian el degradado y la posición y el color del sol (`IllustrationSun`); la escena de la categoría no cambia. | Así se nota la navegación Anterior / Siguiente sin multiplicar las ilustraciones. Con más de 3 fotos se repite el ciclo, pero el contador "i / total" desambigua. | §5 permite "la primera o Todas". Con "Todas", la Home muestra todo al cargar. |
 
 ---
 
@@ -149,6 +151,17 @@ Herramientas de verificación permitidas: `npm run lint`, `npx tsc --noEmit`, `n
 - CA-26.1 Grupos de enlaces apilados a 375px y en 3 columnas a 768px, con fondo `neutral-50`. → DevTools.
 - CA-26.2 No contiene enlaces a rutas inexistentes: sus elementos son texto, no `<Link>` a páginas no solicitadas. → Revisión.
 
+### 1.6 Mejoras visuales (tras RF-26)
+
+**RF-27 — Placeholders ilustrados por categoría** (`PhotoPlaceholder`, `CategoryIllustration`, `IllustrationSun`, ilustraciones; ver §4, §7 "Placeholders ilustrados")
+- CA-27.1 Cada categoría (`beach`, `mansions`, `trending`, `cabins`, `pools`) muestra su escena y su degradado en las tarjetas de Home y Catálogo. → En la Home, seleccionar cada categoría y comprobar a 375px y 768px que todas sus tarjetas muestran la misma escena, distinta de las de otras categorías.
+- CA-27.2 Una categoría sin ilustración (o la ausencia de `category`) muestra `GenericIllustration`. → Revisión de código: el mapa de `CategoryIllustration` tiene fallback; además, comprobación en el navegador renderizando un `PhotoPlaceholder` con `category="desconocida"` y otro sin `category`.
+- CA-27.3 En la galería del Detalle, **dos fotos consecutivas nunca se ven iguales** (cambian el degradado y el sol; con 3 variantes en ciclo, la foto `i` y la `i+3` pueden coincidir, D-9). → En `/rooms/1` (5 fotos), capturas a 375px y 768px de las fotos 1 a 5: cada par consecutivo (1-2, 2-3, 3-4, 4-5) es visualmente distinto.
+- CA-27.4 Se mantienen la proporción (1:1 en tarjetas; `aspect-[4/3]` / `md:aspect-video` en la galería), el `rounded-2xl` y los overlays (`ListingBadge`, `FavoriteButton`, `GalleryControls`, contador), y estos siguen funcionando. → Visual + repetir CA-17.2, CA-17.3, CA-23.1 y CA-24.1/24.2.
+- CA-27.5 Accesibilidad: todos los `<svg>` de las ilustraciones tienen `aria-hidden="true"`. La capa con `role="img"` lleva un `aria-label` con la etiqueta de la foto y no contiene los overlays. → Inspector: los botones de favorito y de la galería quedan fuera del nodo `role="img"`.
+- CA-27.6 Sin imágenes externas ni estilos en línea: colores solo con clases `fill-*`, `stroke-*` y degradados de Tailwind. → Buscar `style=`, `<img`, `url(` y `fill="#` en `/components`: 0 resultados.
+- CA-27.7 `PhotoPlaceholder`, `CategoryIllustration`, `IllustrationSun` y cada ilustración tienen ≤ ~80 líneas. → `wc -l`.
+
 ---
 
 ## 2. Requisitos no funcionales
@@ -212,7 +225,7 @@ Los componentes van en `/components/<Nombre>.tsx` y sus props se tipan con una `
 | `SectionHeader` | `title: string`, `subtitle?: string`, `href?: string` | RF-09 |
 | `ListingGrid` | `listings: Listing[]` | RF-07 |
 | `ListingCard` | `listing: Listing` | RF-08 |
-| `PhotoPlaceholder` | `label?: string`, `className?: string` | RF-08, RF-17 |
+| `PhotoPlaceholder` | `category?: string` (= `Listing.category`; sin valor → genérica), `variant?: number` (por defecto `0`), `label?: string` (nombre accesible, no visible; D-8), `className?: string` (forma y proporción; por defecto `aspect-square rounded-2xl`), `children?: ReactNode` (overlays) | RF-08, RF-17, RF-27 |
 | `StarRating` | `rating: number`, `reviewCount?: number` | RF-08, RF-18 |
 | `LoadingIndicator` | `label?: string` | RF-02 |
 | `ResultsHeader` | `count: number`, `sortOrder: SortOrder`, `onSortChange: (o: SortOrder) => void` | RF-11, RF-12 |
@@ -220,7 +233,7 @@ Los componentes van en `/components/<Nombre>.tsx` y sus props se tipan con una `
 | `ListingList` | `listings: Listing[]` | RF-13 |
 | `MapPlaceholder` | — | RF-14 |
 | `BackLink` | `href?: string` (por defecto `/catalog`), `label?: string` | RF-16 |
-| `PhotoGallery` | `photos: string[]`. Estado interno: `currentIndex` (§5). | RF-17 |
+| `PhotoGallery` | `photos: string[]`, `category?: string` (RF-27). Estado interno: `currentIndex` (§5), que se pasa como `variant`. | RF-17, RF-27 |
 | `GalleryControls` | `onPrev: () => void`, `onNext: () => void`, `canPrev: boolean`, `canNext: boolean` | RF-17 |
 | `ListingHeader` | `title: string`, `rating: number`, `reviewCount: number`, `location: string` | RF-18 |
 | `HostInfo` | `host: Host` | RF-19 |
@@ -238,6 +251,14 @@ Los componentes van en `/components/<Nombre>.tsx` y sus props se tipan con una `
 | `FavoriteButton` | `isFavorite: boolean`, `onToggle: () => void` | RF-24 |
 | `PromoCard` | `title: string`, `ctaLabel: string`, `icon?: ReactNode` | RF-25 |
 | `Footer` | `groups: { title: string; links: string[] }[]` | RF-26 |
+
+### 4.2b Mejora RF-27 (placeholders ilustrados)
+
+| Componente | Props | RF |
+|---|---|---|
+| `CategoryIllustration` | `category?: string`, `variant?: number`. Elige el degradado (mapa literal categoría × variante; las clases de Tailwind deben ser literales, nunca concatenadas), `IllustrationSun` y la escena; fallback `GenericIllustration`. | RF-27 |
+| `IllustrationSun` | `variant: number` (posición y color según `variant % 3`) | RF-27 |
+| `BeachIllustration`, `MansionIllustration`, `TrendingIllustration`, `CabinIllustration`, `PoolIllustration`, `GenericIllustration` | — (SVG decorativo `aria-hidden`, `viewBox` común `0 0 200 200`, `preserveAspectRatio="xMidYMax slice"`, `className="absolute inset-0 size-full"`) | RF-27 |
 
 ### 4.3 Pages (estado según §5)
 
@@ -266,3 +287,4 @@ Así se cumple §5: el estado vive en el contenedor de la vista y baja por `prop
 | Catálogo | RF-10 – RF-14 |
 | Detalle | RF-15 – RF-22 |
 | Opcionales (después de todo lo anterior) | RF-23 – RF-26 |
+| Mejoras visuales | RF-27 |

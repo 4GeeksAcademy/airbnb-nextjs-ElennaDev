@@ -288,3 +288,5 @@ F4 y F5 solo dependen técnicamente de F2. Aun así, se ejecutan en orden (F3 �
 | 7 | `PromoCard` admite `href?` opcional (CTA → `/catalog`). | Un CTA sin destino no tiene sentido; `/catalog` es una ruta existente. |
 | 7 | Tipo `FooterGroup` en `types/footer.ts`; datos en `data/footer.ts`. | §6.2: interfaces de dominio en `/types`. |
 | — | Con `cacheComponents`, Next 16 conserva las páginas visitadas (React `<Activity>`): al volver a la Home se mantienen búsqueda y categoría. | Comportamiento del framework, no del código. |
+| 8 | En `ListingCard`, `PhotoPlaceholder` va **sin `label`**: la ilustración es decorativa (`aria-hidden`). En la galería sí lleva `label` ("Foto: Salón"). | Dentro del `<Link>`, el `aria-label` se sumaría al nombre accesible del enlace ("Foto: Salón Casa frente al mar…"); el título ya describe la tarjeta. |
+| 8 | Tonos `-400`/`-500` rebajados a `-200`/`-400` en algunas escenas (cipreses, pinos, cabaña, agua, sol de mediodía). | La paleta oklch de Tailwind v4 es muy saturada; con estos tonos se cumple "colores suaves" (§7). |

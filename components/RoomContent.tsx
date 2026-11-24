@@ -13,7 +13,7 @@ interface RoomContentProps {
 const RoomContent = ({ listing }: RoomContentProps) => {
   return (
     <>
-      <PhotoGallery key={`gallery-${listing.id}`} photos={listing.photos} />
+      <PhotoGallery key={`gallery-${listing.id}`} photos={listing.photos} category={listing.category} />
       <div className="mt-6 md:grid md:grid-cols-[2fr_1fr] md:items-start md:gap-12">
         <div>
           <ListingHeader
