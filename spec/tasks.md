@@ -96,23 +96,23 @@ Fuentes: [`context.md`](../context.md) (`§N`), [`spec.md`](./spec.md) (`RF-xx`,
 
 ## Fase 4 — Catálogo (`/catalog`)
 
-- [ ] **4.1** `SortSelect`: dos botones chip ("Precio ↑" / "Precio ↓") con `aria-pressed` y `onChange` tipado como `SortOrder`.
+- [x] **4.1** `SortSelect`: dos botones chip ("Precio ↑" / "Precio ↓") con `aria-pressed` y `onChange` tipado como `SortOrder`.
   **Archivo**: `components/SortSelect.tsx` · **RF**: RF-12 (CA-12.1) · **Verifica**: `tsc`; visual (tras 4.8).
-- [ ] **4.2** `ResultsHeader`: "N alojamiento(s)", con singular y plural, más `SortSelect`.
+- [x] **4.2** `ResultsHeader`: "N alojamiento(s)", con singular y plural, más `SortSelect`.
   **Archivo**: `components/ResultsHeader.tsx` · **RF**: RF-11 · **Verifica**: CA-11.1 (dejar 1 y 0 resultados) tras 4.6.
-- [ ] **4.3** `ListingList`: lista de `ListingCard` (1 col → `md:grid-cols-2`) con mensaje de lista vacía.
+- [x] **4.3** `ListingList`: lista de `ListingCard` (1 col → `md:grid-cols-2`) con mensaje de lista vacía.
   **Archivo**: `components/ListingList.tsx` · **RF**: RF-13 · **Verifica**: CA-13.1 (importa el mismo `ListingCard`), CA-13.3.
-- [ ] **4.4** `MapPlaceholder`: caja `bg-neutral-100 rounded-2xl` con el texto "Mapa", `h-64` en móvil y `sticky` + alto de viewport en `md:`.
+- [x] **4.4** `MapPlaceholder`: caja `bg-neutral-100 rounded-2xl` con el texto "Mapa", `h-64` en móvil y `sticky` + alto de viewport en `md:`.
   **Archivo**: `components/MapPlaceholder.tsx` · **RF**: RF-14 · **Verifica**: `tsc`; visual (tras 4.8).
-- [ ] **4.5** Page: estado (`isLoading`, `listings`, `query`, `sortOrder = 'asc'`) y carga simulada (T-4).
+- [x] **4.5** Page: estado (`isLoading`, `listings`, `query`, `sortOrder = 'asc'`) y carga simulada (T-4).
   **Archivo**: `app/catalog/page.tsx` · **RF**: RF-02 · **Verifica**: CA-02.1 y CA-02.3 en `/catalog`.
-- [ ] **4.6** Page: filtro por `query` derivado + `Navbar` con búsqueda.
+- [x] **4.6** Page: filtro por `query` derivado + `Navbar` con búsqueda.
   **Archivo**: `app/catalog/page.tsx` · **RF**: RF-10 · **Verifica**: CA-10.1.
-- [ ] **4.7** Page: orden por `pricePerNight` sobre una **copia** del array.
+- [x] **4.7** Page: orden por `pricePerNight` sobre una **copia** del array.
   **Archivo**: `app/catalog/page.tsx` · **RF**: RF-12 · **Verifica**: CA-12.2 a CA-12.4 (primer y último precio, revisión de código, orden que se mantiene al buscar).
-- [ ] **4.8** Page: layout con la lista arriba y el mapa debajo en móvil, y `md:grid-cols-[3fr_2fr]` con el mapa `sticky` en escritorio.
+- [x] **4.8** Page: layout con la lista arriba y el mapa debajo en móvil, y `md:grid-cols-[3fr_2fr]` con el mapa `sticky` en escritorio.
   **Archivo**: `app/catalog/page.tsx` · **RF**: RF-13, RF-14 · **Verifica**: CA-13.2, CA-14.1 y CA-14.2 a 375px y 768px, haciendo scroll.
-- [ ] **4.9** Cierre de la fase 4.
+- [x] **4.9** Cierre de la fase 4.
   **Archivo**: — · **RF**: RF-02, RF-10 – RF-14 · **Verifica**: VB; volver a pasar todos los CA de esos RF; commit "fase 4".
 
 ---
