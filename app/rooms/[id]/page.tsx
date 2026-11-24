@@ -1,11 +1,14 @@
-"use client";
+import { Suspense } from "react";
+import RoomDetail from "@/components/RoomDetail";
 
-import { use } from "react";
-
+// cacheComponents está activo: leer params es un acceso en tiempo de ejecución
+// y debe ocurrir dentro de <Suspense> para que la ruta tenga un static shell.
 const RoomPage = ({ params }: PageProps<"/rooms/[id]">) => {
-  const { id } = use(params);
-
-  return <main className="px-6 py-8">Detalle {id}</main>;
+  return (
+    <Suspense fallback={null}>
+      <RoomDetail params={params} />
+    </Suspense>
+  );
 };
 
 export default RoomPage;

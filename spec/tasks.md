@@ -12,19 +12,19 @@ Fuentes: [`context.md`](../context.md) (`§N`), [`spec.md`](./spec.md) (`RF-xx`,
 
 ## Fase 0 — Setup
 
-- [ ] **0.1** Instalar `lucide-react` (D-4).
+- [x] **0.1** Instalar `lucide-react` (D-4).
   **Archivo**: `package.json`, `package-lock.json` · **RF**: RF-01 (iconos), RNF-03 · **Verifica**: `git diff package.json` muestra solo `lucide-react` en `dependencies`.
-- [ ] **0.2** Ajustar el layout raíz: `lang="es"`, `metadata` propia (sin marca de la referencia), Geist en el `body` con `font-sans bg-white text-neutral-800`.
+- [x] **0.2** Ajustar el layout raíz: `lang="es"`, `metadata` propia (sin marca de la referencia), Geist en el `body` con `font-sans bg-white text-neutral-800`.
   **Archivo**: `app/layout.tsx` · **RF**: RF-04 · **Verifica**: `tsc`; título de la pestaña del navegador; inspector > Computed > `font-family` = Geist.
-- [ ] **0.3** Quitar de `globals.css` el `font-family: Arial` del `body` y el bloque `prefers-color-scheme: dark`.
+- [x] **0.3** Quitar de `globals.css` el `font-family: Arial` del `body` y el bloque `prefers-color-scheme: dark`.
   **Archivo**: `app/globals.css` · **RF**: RF-04 · **Verifica**: con el SO en modo oscuro, la página sigue con fondo blanco y fuente Geist.
-- [ ] **0.4** Sustituir el boilerplate por un placeholder mínimo "Home" (`const Page` + `export default`, T-1).
+- [x] **0.4** Sustituir el boilerplate por un placeholder mínimo "Home" (`const Page` + `export default`, T-1).
   **Archivo**: `app/page.tsx` · **RF**: RF-03 · **Verifica**: `/` muestra "Home".
-- [ ] **0.5** Crear el placeholder "Catálogo".
+- [x] **0.5** Crear el placeholder "Catálogo".
   **Archivo**: `app/catalog/page.tsx` · **RF**: RF-03 · **Verifica**: `/catalog` muestra "Catálogo".
-- [ ] **0.6** Crear el placeholder del Detalle con `'use client'`, que lea `params` con `use(params)` y tipe las props con `PageProps<'/rooms/[id]'>`.
+- [x] **0.6** Crear el placeholder del Detalle con `'use client'`, que lea `params` con `use(params)` y tipe las props con `PageProps<'/rooms/[id]'>`.
   **Archivo**: `app/rooms/[id]/page.tsx` · **RF**: RF-15 (CA-15.1) · **Verifica**: `npx next typegen` + `tsc` sin errores; `/rooms/123` muestra "123".
-- [ ] **0.7** Cierre de la fase 0.
+- [x] **0.7** Cierre de la fase 0.
   **Archivo**: — · **RF**: RNF-07 · **Verifica**: VB; `git diff` sin cambios en `next.config.ts`, `tsconfig.json` ni `eslint.config.mjs`; commit "fase 0".
 
 ---

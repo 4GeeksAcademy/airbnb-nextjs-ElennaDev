@@ -245,9 +245,15 @@ Los componentes van en `/components/<Nombre>.tsx` y sus props se tipan con una `
 |---|---|---|
 | `app/page.tsx` | `isLoading`, `listings: Listing[]`, `query`, `activeCategory` | Carga simulada al montar |
 | `app/catalog/page.tsx` | `isLoading`, `listings: Listing[]`, `query`, `sortOrder` | Carga simulada al montar |
-| `app/rooms/[id]/page.tsx` | `isLoading`, `listing: Listing \| null` | Carga simulada, dependencia `[id]` |
+| `app/rooms/[id]/page.tsx` → `components/RoomDetail.tsx` | `isLoading`, `listing: Listing \| null` | Carga simulada, dependencia `[id]` |
 
-Las tres pages son Client Components (`'use client'`), según §5.
+Home y Catálogo son Client Components (`'use client'`), según §5.
+
+**Excepción del Detalle (D-7, detectada en la fase 0):** `next.config.ts` tiene activado `cacheComponents`. Con esa opción, leer `params` fuera de `<Suspense>` bloquea el prerender ("uncached data during prerendering"). Por eso:
+- `app/rooms/[id]/page.tsx` es un **Server Component** sin estado que solo pinta `<Suspense>` y pasa la Promise `params`.
+- `components/RoomDetail.tsx` (`'use client'`) hace `use(params)` y contiene el estado y el efecto de la vista.
+
+Así se cumple §5: el estado vive en el contenedor de la vista y baja por `props`.
 
 ---
 
