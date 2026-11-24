@@ -274,3 +274,17 @@ F0 Setup → F1 Tipos/mocks → F2 Base ─┬→ F3 Home ─→ F4 Catálogo �
 ```
 
 F4 y F5 solo dependen técnicamente de F2. Aun así, se ejecutan en orden (F3 → F4 → F5) por la regla de fases secuenciales.
+
+---
+
+## Registro de desviaciones (durante la implementación)
+
+| Fase | Desviación | Motivo |
+|---|---|---|
+| 0 | Detalle partido en `page.tsx` (Server Component con `<Suspense>`) + `RoomDetail` (cliente con estado). Ver T-8 / D-7. | `cacheComponents: true` en `next.config.ts`: `use(params)` fuera de `<Suspense>` bloquea el prerender. |
+| 5 | Nuevo `components/RoomContent.tsx` (layout del Detalle) extraído de `RoomDetail`. | `RoomDetail` pasaba de ~80 líneas (§6.5). |
+| 5 | `AmenityItem` con `hyphens-auto` + `min-w-0`; `GuestCounter` con `flex-wrap`. | A 768px la columna de 2fr es estrecha: etiquetas largas desbordaban con 3 columnas (CA-20.1 se mantiene). |
+| 7 | `FavoriteButton` es **hermano** del `<Link>` en `ListingCard` (superpuesto con `absolute`), no hijo. Mantiene `preventDefault` + `stopPropagation`. | Un `<button>` dentro de `<a>` es HTML inválido (contenido interactivo anidado). |
+| 7 | `PromoCard` admite `href?` opcional (CTA → `/catalog`). | Un CTA sin destino no tiene sentido; `/catalog` es una ruta existente. |
+| 7 | Tipo `FooterGroup` en `types/footer.ts`; datos en `data/footer.ts`. | §6.2: interfaces de dominio en `/types`. |
+| — | Con `cacheComponents`, Next 16 conserva las páginas visitadas (React `<Activity>`): al volver a la Home se mantienen búsqueda y categoría. | Comportamiento del framework, no del código. |

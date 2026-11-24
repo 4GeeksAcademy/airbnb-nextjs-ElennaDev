@@ -32,7 +32,7 @@ export const listings: Listing[] = [
     id: "1", title: "Casa frente al mar en Tarifa", location: "Tarifa, Cádiz",
     pricePerNight: 145, rating: 4.92, reviewCount: 128, category: "beach",
     photos: FULL_GALLERY, maxGuests: 6, host: { name: "Lucía", yearsHosting: 7 },
-    amenities: [WIFI, KITCHEN, SEA_VIEW, PARKING, WASHER, AC],
+    amenities: [WIFI, KITCHEN, SEA_VIEW, PARKING, WASHER, AC], badge: "Favorito de los viajeros",
   },
   {
     id: "2", title: "Apartamento junto a la playa", location: "Sitges, Barcelona",
@@ -44,7 +44,7 @@ export const listings: Listing[] = [
     id: "3", title: "Mansión con jardín histórico", location: "Sevilla",
     pricePerNight: 620, rating: 4.97, reviewCount: 41, category: "mansions",
     photos: ["Fachada", "Jardín", "Salón", "Comedor"], maxGuests: 12, host: { name: "Carmen", yearsHosting: 11 },
-    amenities: [WIFI, KITCHEN, POOL, PARKING, AC, GYM, TV, WASHER],
+    amenities: [WIFI, KITCHEN, POOL, PARKING, AC, GYM, TV, WASHER], badge: "Favorito de los viajeros",
   },
   {
     id: "4", title: "Palacete con vistas al Retiro", location: "Madrid",
@@ -68,7 +68,7 @@ export const listings: Listing[] = [
     id: "7", title: "Cabaña de madera en el Pirineo", location: "Benasque, Huesca",
     pricePerNight: 135, rating: 4.95, reviewCount: 76, category: "cabins",
     photos: FULL_GALLERY, maxGuests: 5, host: { name: "Iker", yearsHosting: 6 },
-    amenities: [WIFI, KITCHEN, FIREPLACE, MOUNTAIN_VIEW, PARKING],
+    amenities: [WIFI, KITCHEN, FIREPLACE, MOUNTAIN_VIEW, PARKING], badge: "Nuevo",
   },
   {
     id: "8", title: "Refugio entre robles", location: "Cangas de Onís, Asturias",
@@ -98,6 +98,6 @@ export const listings: Listing[] = [
     id: "12", title: "Casa cueva reformada", location: "Guadix, Granada",
     pricePerNight: 76, rating: 4.74, reviewCount: 61, category: "trending",
     photos: ["Entrada", "Salón", "Dormitorio"], maxGuests: 4, host: { name: "Rocío", yearsHosting: 3 },
-    amenities: [WIFI, KITCHEN, PARKING, TV],
+    amenities: [WIFI, KITCHEN, PARKING, TV], badge: "Nuevo",
   },
 ];

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import Footer from "@/components/Footer";
+import { footerGroups } from "@/data/footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,6 +19,7 @@ const RootLayout = ({ children }: LayoutProps<"/">) => {
     <html lang="es" className={`${geistSans.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-white font-sans text-neutral-800">
         {children}
+        <Footer groups={footerGroups} />
       </body>
     </html>
   );

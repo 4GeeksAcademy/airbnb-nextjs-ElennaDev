@@ -179,19 +179,19 @@ Fuentes: [`context.md`](../context.md) (`§N`), [`spec.md`](./spec.md) (`RF-xx`,
 
 ## Fase 7 — Opcionales (solo con la fase 6 cerrada)
 
-- [ ] **7.1** Añadir `badge` a 3–4 mocks.
+- [x] **7.1** Añadir `badge` a 3–4 mocks.
   **Archivo**: `data/listings.ts` · **RF**: RF-23 · **Verifica**: `tsc`.
-- [ ] **7.2** `ListingBadge` + uso en `ListingCard` (`absolute top-3 left-3`, solo si existe `badge`).
+- [x] **7.2** `ListingBadge` + uso en `ListingCard` (`absolute top-3 left-3`, solo si existe `badge`).
   **Archivo**: `components/ListingBadge.tsx`, `components/ListingCard.tsx` · **RF**: RF-23 · **Verifica**: CA-23.1 (tarjetas con y sin badge).
-- [ ] **7.3** `FavoriteButton`: icono `Heart`, `aria-label`, `preventDefault()` + `stopPropagation()`.
+- [x] **7.3** `FavoriteButton`: icono `Heart`, `aria-label`, `preventDefault()` + `stopPropagation()`.
   **Archivo**: `components/FavoriteButton.tsx` · **RF**: RF-24 · **Verifica**: `tsc`.
-- [ ] **7.4** Integrar `FavoriteButton` en `ListingCard`, con estado `isFavorite` y `'use client'`.
+- [x] **7.4** Integrar `FavoriteButton` en `ListingCard`, con estado `isFavorite` y `'use client'`.
   **Archivo**: `components/ListingCard.tsx` · **RF**: RF-24 · **Verifica**: CA-24.1 y CA-24.2 (alterna el estado y no navega); el archivo sigue ≤ ~80 líneas.
-- [ ] **7.5** `PromoCard` + uso en la Home.
+- [x] **7.5** `PromoCard` + uso en la Home.
   **Archivo**: `components/PromoCard.tsx`, `app/page.tsx` · **RF**: RF-25 · **Verifica**: CA-25.1 a 375px y 768px.
-- [ ] **7.6** `Footer`: grupos de enlaces como texto plano, idioma/moneda y copyright propio.
+- [x] **7.6** `Footer`: grupos de enlaces como texto plano, idioma/moneda y copyright propio.
   **Archivo**: `components/Footer.tsx` · **RF**: RF-26 · **Verifica**: CA-26.2 (sin `<Link>` a rutas inexistentes).
-- [ ] **7.7** Montar `Footer` en el layout raíz.
+- [x] **7.7** Montar `Footer` en el layout raíz.
   **Archivo**: `app/layout.tsx` · **RF**: RF-26 · **Verifica**: CA-26.1 en las tres rutas a 375px y 768px.
-- [ ] **7.8** Cierre de la fase 7.
+- [x] **7.8** Cierre de la fase 7.
   **Archivo**: — · **RF**: RF-23 – RF-26, RNF-05 · **Verifica**: VB; repetir las auditorías 6.4 a 6.7; commit "fase 7".

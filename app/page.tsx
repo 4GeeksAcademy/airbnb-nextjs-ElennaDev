@@ -1,10 +1,12 @@
 "use client";
 
+import { MapPinned } from "lucide-react";
 import { useEffect, useState } from "react";
 import CategoryBar from "@/components/CategoryBar";
 import ListingGrid from "@/components/ListingGrid";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import Navbar from "@/components/Navbar";
+import PromoCard from "@/components/PromoCard";
 import SectionHeader from "@/components/SectionHeader";
 import { ALL_CATEGORY_ID, categories } from "@/data/categories";
 import { listings as mockListings } from "@/data/listings";
@@ -53,6 +55,12 @@ const HomePage = () => {
           />
           {isLoading ? <LoadingIndicator /> : <ListingGrid listings={visibleListings} />}
         </section>
+        <PromoCard
+          title="¿Buscas algo concreto? Compara todos los alojamientos por precio"
+          ctaLabel="Ver el catálogo"
+          href="/catalog"
+          icon={<MapPinned className="size-14" strokeWidth={1.25} aria-hidden="true" />}
+        />
       </main>
     </>
   );
